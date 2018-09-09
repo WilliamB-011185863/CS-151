@@ -1,18 +1,19 @@
 package reservationPackage;
+import java.io.IOException;
 import java.util.*;
 
 //test!
 
 public class ReservationTester extends ReservationEvent{
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		Scanner in = new Scanner(System.in);
 		String command = "start";
 		airlineConstructor();
 		String group = "";
-		FileInterfaceTest();
-		while (command != "Q") { //main loop
+		LoadFiles();
+		while (command.equalsIgnoreCase("Q") != true) { //main loop   WRONG Q VALUE
 			System.out.println("Add [P]assenger, Add [G]roup, [C]ancel Reservations, Print Seating [A]vailability Chart, Print [M]anifest, [Q]uit");
 			command = in.nextLine();
 			//System.out.println(command);
@@ -57,22 +58,10 @@ public class ReservationTester extends ReservationEvent{
 			//}
 		}
 		
+		//Time to quit, save the data
+		SaveFiles();
 		
-		
-		
-	}
-	
-	private static void loadEvents() {
-		ReservationFileInterface RFI = new ReservationFileInterface();
-		
-	}
-	private static void saveEvents() {
-		ReservationFileInterface RFI = new ReservationFileInterface();
-		
-	}
-	private static void FileInterfaceTest() {
-		ReservationFileInterface RFI = new ReservationFileInterface();
-		RFI.CreateFile();
+		System.out.println("Check 63; Main complete"); 
 	}
 }
 

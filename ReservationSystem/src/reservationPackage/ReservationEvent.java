@@ -1,5 +1,6 @@
 package reservationPackage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ReservationEvent {
@@ -350,54 +351,70 @@ public class ReservationEvent {
 		}
 		return;
 	}
-	public void LoadFiles() {
-		ArrayList<String> fileData = null; //= [ReservationFileInterface].ReadFile();
-		//if file exists,
-		ArrayList<String> unpackedFirstClass = new ArrayList<String>();
-		ArrayList<String> unpackedEconomyClass = new ArrayList<String>();
-		String firstClassData = fileData.get(0);
-		String economyClassData = fileData.get(1);
-		unpackedFirstClass = Unpacker(firstClassData);
-		unpackedEconomyClass = Unpacker(economyClassData);
-		int index = 0;
-		for (int i = 0; i < 2; i++) {
-			//System.out.println("Check 4");
-			for (int j = 0; j < 4; j++) {
-				//System.out.println("Check 5");
-				firstClass[i][j].setName(unpackedFirstClass.get(index));
-				index++;
-				firstClass[i][j].setGroup(unpackedFirstClass.get(index));
-				index++;
-				if (firstClass[i][j].getName() != "" | firstClass[i][j].getGroup() != "") {
-					firstClass[i][j].isOccupied();
+	public void setupFileIO() throws IOException {
+		ReservationFileInterface RFI = new ReservationFileInterface();
+		RFI.CreateFile();
+		LoadFiles();
+	}
+	public static void LoadFiles() throws IOException {
+		ReservationFileInterface RFI = new ReservationFileInterface();
+		ArrayList<String> fileData = RFI.ReadFile(); //= [ReservationFileInterface].ReadFile();
+		if (fileData.size() > 1) {
+			ArrayList<String> unpackedFirstClass = new ArrayList<String>();
+			ArrayList<String> unpackedEconomyClass = new ArrayList<String>();
+			String firstClassData = fileData.get(0);
+			String economyClassData = fileData.get(1);
+			unpackedFirstClass = Unpacker(firstClassData);
+			unpackedEconomyClass = Unpacker(economyClassData);
+			int index = 0;
+			for (int i = 0; i < 2; i++) {
+				//System.out.println("Check 4");
+				for (int j = 0; j < 4; j++) {
+					//System.out.println("Check 5");
+					firstClass[i][j].setName(unpackedFirstClass.get(index));
+					System.out.println("index = " + index + ".  (index) = " + unpackedFirstClass.get(index));
+					index++;
+					firstClass[i][j].setGroup(unpackedFirstClass.get(index));
+					System.out.println("index = " + index + ".  (index) = " + unpackedFirstClass.get(index));
+					index++;
+					if (firstClass[i][j].getName() != "" | firstClass[i][j].getGroup() != "") {
+						firstClass[i][j].isOccupied();
+					}
 				}
 			}
-		}
-		index = 0;
-		for (int i = 0; i < 20; i++) {
-			for (int j = 0; j < 6; j++) {
-				economyClass[i][j].setName(unpackedEconomyClass.get(index));
-				index++;
-				economyClass[i][j].setGroup(unpackedEconomyClass.get(index));
-				index++;
-				if (economyClass[i][j].getName() != "" | economyClass[i][j].getGroup() != "") {
-					economyClass[i][j].isOccupied();
+			index = 0;
+			for (int i = 0; i < 20; i++) {
+				for (int j = 0; j < 6; j++) {
+					economyClass[i][j].setName(unpackedEconomyClass.get(index));
+					index++;
+					economyClass[i][j].setGroup(unpackedEconomyClass.get(index));
+					index++;
+					if (economyClass[i][j].getName() != "" | economyClass[i][j].getGroup() != "") {
+						economyClass[i][j].isOccupied();
+					}
 				}
 			}
+			System.out.println("Check: 395; LoadFiles has found a valid file");
 		}
-		//else, create file
+		else {
+			System.out.println("Check: 397; LoadFiles has not collected a prebuilt file");
+			RFI.CreateFile();
+		}
+		//return;
 	}
 	
-	public ArrayList<String> Unpacker(String rawData){
+	public static ArrayList<String> Unpacker(String rawData){
 		ArrayList<String> Unpacked = new ArrayList<String>();
 		int l = rawData.length();
-		String current = null;
+		String current = "";
 		for (int n = 0; n < l; n++) {
-			if (',' == rawData.charAt(n) && current != "") {
+			if (',' == rawData.charAt(n)) {//&& current != ""
+				//System.out.println("n = " + n + ", charAt = " + rawData.charAt(n));
 				Unpacked.add(current);
 				current = "";
 			}
 			else{ //if (' ' != passengerNames.charAt(n)) {
+				System.out.println("This is a test.");
 				current = current + rawData.charAt(n);
 				//currentName.concat((passengerNames.charAt(n)).toString());
 			}
@@ -405,9 +422,33 @@ public class ReservationEvent {
 		return Unpacked;
 	}
 	
+	public static void SaveFiles() throws IOException {
+		ReservationFileInterface RFI = new ReservationFileInterface();
+		String entry = "";
+		ArrayList<String> PackedData = new ArrayList<String>();
+		for (int i = 0; i < 2; i++) {
+			//System.out.println("Check 4");
+			for (int j = 0; j < 4; j++) {
+				//System.out.println("Check 5");
+				entry = entry + firstClass[i][j].getName() + ",";
+				entry = entry + firstClass[i][j].getGroup() + ",";
+			}
+		}
+		PackedData.add(entry);
+		entry = "";
+		for (int i = 0; i < 20; i++) {
+			for (int j = 0; j < 6; j++) {
+				entry = entry + economyClass[i][j].getName() + ",";
+				entry = entry + economyClass[i][j].getGroup() + ",";
+			}
+		}
+		PackedData.add(entry);
+		RFI.RewriteFile(PackedData);
+	}
 	
-	
-	
+	public void FilePacker() { //change return to String
+		
+	}
 	
 	
 	
