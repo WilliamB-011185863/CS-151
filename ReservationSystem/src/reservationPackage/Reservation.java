@@ -33,6 +33,9 @@ public class Reservation {
 	public Boolean checkSeat() {
 		return occupency;
 	}
+	public void isOccupied() {
+		occupency = true;
+	}
 	public void bookSeat(String inputName, String inputGroup) {
 		name = inputName;
 		group = inputGroup;

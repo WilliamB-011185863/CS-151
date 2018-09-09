@@ -350,6 +350,74 @@ public class ReservationEvent {
 		}
 		return;
 	}
+	public void LoadFiles() {
+		ArrayList<String> fileData = null; //= [ReservationFileInterface].ReadFile();
+		//if file exists,
+		ArrayList<String> unpackedFirstClass = new ArrayList<String>();
+		ArrayList<String> unpackedEconomyClass = new ArrayList<String>();
+		String firstClassData = fileData.get(0);
+		String economyClassData = fileData.get(1);
+		unpackedFirstClass = Unpacker(firstClassData);
+		unpackedEconomyClass = Unpacker(economyClassData);
+		int index = 0;
+		for (int i = 0; i < 2; i++) {
+			//System.out.println("Check 4");
+			for (int j = 0; j < 4; j++) {
+				//System.out.println("Check 5");
+				firstClass[i][j].setName(unpackedFirstClass.get(index));
+				index++;
+				firstClass[i][j].setGroup(unpackedFirstClass.get(index));
+				index++;
+				if (firstClass[i][j].getName() != "" | firstClass[i][j].getGroup() != "") {
+					firstClass[i][j].isOccupied();
+				}
+			}
+		}
+		index = 0;
+		for (int i = 0; i < 20; i++) {
+			for (int j = 0; j < 6; j++) {
+				economyClass[i][j].setName(unpackedEconomyClass.get(index));
+				index++;
+				economyClass[i][j].setGroup(unpackedEconomyClass.get(index));
+				index++;
+				if (economyClass[i][j].getName() != "" | economyClass[i][j].getGroup() != "") {
+					economyClass[i][j].isOccupied();
+				}
+			}
+		}
+		//else, create file
+	}
+	
+	public ArrayList<String> Unpacker(String rawData){
+		ArrayList<String> Unpacked = new ArrayList<String>();
+		int l = rawData.length();
+		String current = null;
+		for (int n = 0; n < l; n++) {
+			if (',' == rawData.charAt(n) && current != "") {
+				Unpacked.add(current);
+				current = "";
+			}
+			else{ //if (' ' != passengerNames.charAt(n)) {
+				current = current + rawData.charAt(n);
+				//currentName.concat((passengerNames.charAt(n)).toString());
+			}
+		} //All passenger names are now entries in passengerGroup
+		return Unpacked;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
 
