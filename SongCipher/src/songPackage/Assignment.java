@@ -28,7 +28,12 @@ EJGCLKFCGUNKBHEJGCLKFCGUNKBHEJGCLKFCGUNKBHEJGCLKFCGUNKBHE
 
 JGCLKFCGUNKBHEJGCLK
 
-Initial note: The "lyric" is just "FCGUNKBHEJGCLK" repeating over and over.
+Notes: The "lyric" is just "FCGUNKBHEJGCLK" repeating over and over.
 14 letters
 repeats 38 times
+
+Cesear Cipher - no
+Affine Cipher - untested
+Double Transcription - untested
+One-Time Pad - no
 */
