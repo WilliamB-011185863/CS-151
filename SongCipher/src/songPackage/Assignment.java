@@ -32,8 +32,8 @@ Notes: The "lyric" is just "FCGUNKBHEJGCLK" repeating over and over.
 14 letters
 repeats 38 times
 
-Cesear Cipher - no
-Affine Cipher - untested
+Cesear Cipher - no (tested)
+Affine Cipher - probably not, tested through multiplier 10
 Double Transcription - untested
-One-Time Pad - no
+One-Time Pad - no (unreasnoble)
 */

@@ -10,9 +10,13 @@ public class CharIntConvertor {
 		ArrayList<Integer> charArray = new ArrayList<Integer>();
 		char[] unpacked = raw.toCharArray();
 		//Character[] altpacked = new Character[unpacked.length];
-		for (int i = 1, j = unpacked.length; i < j; i++) {
-			int convertedInt = Character.getNumericValue(Character.valueOf(unpacked[i]));
-			charArray.add(convertedInt);
+		for (int i = 0, j = unpacked.length; i < j; i++) {
+			if (unpacked[i] != ' ') { //This step filters out spaces, which would cause errors later on
+				int convertedInt = Character.getNumericValue(Character.valueOf(unpacked[i]));
+				convertedInt = convertedInt - 10; //Neccesary, for some reason.
+				charArray.add(convertedInt);
+				//System.out.println(convertedInt);
+			}
 		}
 		
 		return charArray;
@@ -28,13 +32,20 @@ public class CharIntConvertor {
 		for (int i = 0, j = intArray.size(); i < j; i++) {
 			if (intArray.get(i) > max) {
 				max = intArray.get(i);
-			}
+			} //This gets the maximum value from the intArray
 		}
 		while (fullLetterIndex.size() < max) {
 			fullLetterIndex.addAll(Arrays.asList(letterIndex));
 		}
+		fullLetterIndex.addAll(Arrays.asList(letterIndex)); //A extra addition can prevent outofbounds exceptions
 		for (int i = 0, j = intArray.size(); i < j; i++) {
-			builder.append(fullLetterIndex.get(intArray.get(i)));
+			//System.out.println(fullLetterIndex.get(intArray.get(i)));
+			try{
+				builder.append(fullLetterIndex.get(intArray.get(i)));
+			}
+			catch (IndexOutOfBoundsException e){
+				System.out.println("i = " +  i + "," + "get(i) = "+ intArray.get(i) + ", fullLetterIndex is size " + fullLetterIndex.size());
+			}
 		}
 		return builder.toString();
 	}
