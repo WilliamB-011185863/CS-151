@@ -9,10 +9,11 @@ public class CharIntConvertor {
 	public ArrayList<Integer> CharToInt(String raw){
 		ArrayList<Integer> charArray = new ArrayList<Integer>();
 		char[] unpacked = raw.toCharArray();
-		
-		
-		
-		
+		//Character[] altpacked = new Character[unpacked.length];
+		for (int i = 1, j = unpacked.length; i < j; i++) {
+			int convertedInt = Character.getNumericValue(Character.valueOf(unpacked[i]));
+			charArray.add(convertedInt);
+		}
 		
 		return charArray;
 	}
