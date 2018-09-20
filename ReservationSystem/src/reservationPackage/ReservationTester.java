@@ -33,6 +33,7 @@ public class ReservationTester extends ReservationEvent{
 				System.out.println("Enter the name of your group");
 				groupName = in.nextLine();
 				System.out.println("Enter the name of the group members, seperated by commas");
+				passengerNames = in.nextLine();
 				bookGroup(groupName, passengerNames);
 			}
 			else if (command.equalsIgnoreCase("C")) {//[C]ancel Reservations - done

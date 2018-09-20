@@ -57,6 +57,9 @@ public class Reservation {
 			return "Vacent";
 		}
 	}
+	public void quickOccupencyFix() {
+		//Apparently this object generates with occupency of true
+	}
 	
 	
 	

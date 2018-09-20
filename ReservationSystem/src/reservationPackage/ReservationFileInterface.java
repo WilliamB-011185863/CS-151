@@ -35,6 +35,7 @@ public class ReservationFileInterface {
 		//read all events out to memory for listing
 		
 		ArrayList<String> words = new ArrayList<String>();
+		CreateFile();
 		BufferedReader reader = new BufferedReader(new FileReader("events.txt"));
 		String line;
 		while ((line = reader.readLine()) != null) {
