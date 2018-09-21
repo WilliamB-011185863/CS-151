@@ -7,6 +7,7 @@ public class Reservation {
 	private Boolean occupency;
 	
 	public Reservation(String name, String group) {
+		//Basic object constructor, used by the reservation array constructor
 		this.name = name;
 		this.group = group;
 		this.occupency = false;
@@ -37,16 +38,19 @@ public class Reservation {
 		occupency = true;
 	}
 	public void bookSeat(String inputName, String inputGroup) {
+		//Generic function for booking the object
 		name = inputName;
 		group = inputGroup;
 		occupency = true;
 	}
 	public void unBook() {
+		//Returns the object to an ideal unbooked state
 		name = "";
 		group = "";
 		occupency = false;
 	}
 	public String quickDesignation() {
+		//Used for checkManifest methods
 		if (name != "") {
 			return name;
 		}
@@ -57,11 +61,5 @@ public class Reservation {
 			return "Vacent";
 		}
 	}
-	public void quickOccupencyFix() {
-		//Apparently this object generates with occupency of true
-	}
-	
-	
-	
 }
 

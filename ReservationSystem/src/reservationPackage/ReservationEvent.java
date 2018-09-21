@@ -12,37 +12,35 @@ public class ReservationEvent {
 	private static Reservation[][] economyClass;
 	
 	public static void airlineConstructor() {
-		//System.out.println("Check 1");
+		//Used at the start of the run to create the Reservation[][] arrays
+		//(which are subsequently populated by LoadFiles())
 		firstClass = new Reservation[2][4];
-		//System.out.println("Check 3");
 		for (int i = 0; i < 2; i++) {
-			//System.out.println("Check 4");
 			for (int j = 0; j < 4; j++) {
-				//System.out.println("Check 5");
-				firstClass[i][j] = new Reservation("","");//.establish() = new Reservation(); 
+				firstClass[i][j] = new Reservation("","");
 			}
 		}
 		economyClass = new Reservation[20][6];
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 6; j++) {
-				economyClass[i][j] = new Reservation("","");//.establish(); 
+				economyClass[i][j] = new Reservation("","");
 			}
 		}
-		//System.out.println("Check 2");
 	}
 	
 	public static Reservation getSeatByName(String nameToSeek) {
+		//Takes a String name, searches than returns the first match (or null)
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 4; j++) {
 				if (nameToSeek.equals(firstClass[i][j].getName())) {
-					return firstClass[i][j];//convertSeatId(i, j)
+					return firstClass[i][j];
 				}
 			}
 		}
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 6; j++) {
 				if (nameToSeek.equals(economyClass[i][j].getName())) {
-					return economyClass[i][j];//convertSeatId(i, j)
+					return economyClass[i][j];
 				}
 			}
 		}
@@ -50,25 +48,8 @@ public class ReservationEvent {
 		return null;
 	}
 	
-	public String getSeatByGroup(String groupToSeek) { //need to return multiple
-		for (int i = 0; i < 2; i++) {
-			for (int j = 0; j < 4; j++) {
-				if (groupToSeek == firstClass[i][j].getName()) {
-					return convertSeatId(i, j);
-				}
-			}
-		}
-		for (int i = 0; i < 20; i++) {
-			for (int j = 0; j < 6; j++) {
-				if (groupToSeek == economyClass[i][j].getName()) {
-					return convertSeatId(i, j);
-				}
-			}
-		}
-		return ("No match found");
-	}
-	
 	private static String convertSeatId(int i, int j) {
+		//Converts i,j to a String for the seat, for example 1,0 becomes 1A
 		String altJ;
 		if (j == 0) {
 			altJ = "A";
@@ -95,18 +76,20 @@ public class ReservationEvent {
 	}
 	
 	public void bookFirstClassSeat(int i, int j, String name, String group) {
+		//simple booking function, basically a wrapper for bookSeat
 		i--;
 		j--;
 		firstClass[i][j].bookSeat(name, group);
 	}
 	public void bookEconomyClassSeat(int i, int j, String name, String group) {
+		//simple booking function, basically a wrapper for bookSeat
 		i--;
 		j--;
 		economyClass[i][j].bookSeat(name, group);
 	}
 	
 	public static void checkFirstClassManifest() {
-		
+		//Used for printing the Manifest
 		for (int i = 0; i < 2; i++) {
 			System.out.print("First     ");
 			for (int j = 0; j < 4; j++) {
@@ -117,6 +100,7 @@ public class ReservationEvent {
 	}
 	
 	public static void checkEconomyClassManifest() {
+		//Used for printing the Manifest
 		for (int i = 0; i < 20; i++) {
 			System.out.print("Economy     ");
 			for (int j = 0; j < 6; j++) {
@@ -127,6 +111,7 @@ public class ReservationEvent {
 	}
 	
 	public static String jToLetter(int j) {
+		//Converts the int j to cooresponding letter
 		j++;
 		String altI;
 		if (j == 1) {
@@ -153,9 +138,8 @@ public class ReservationEvent {
 		return altI;
 	}
 	
-	public void printFirstClassSeating() { //First 1: B, D  2: C, D
+	public void printFirstClassSeating() { 
 		System.out.print("First ");
-		int k = 0; //Counter for "None"
 		for (int i = 0; i < 2; i++) {
 			System.out.print(i++ + ": ");
 			for (int j = 0; j < 4; j++) {
@@ -171,15 +155,14 @@ public class ReservationEvent {
 		}
 	}  
 	
-	public static void printEconomyClassSeating() { //First 1: B, D  2: C, D
+	public static void printEconomyClassSeating() { 
 		System.out.print("Economy ");
-		//int k = 0; //Counter for "None"
 		for (int i = 0; i < 20; i++) {
 			System.out.print((i + 1) + ": ");
 			for (int j = 0; j < 6; j++) {
 				if (economyClass[i][j].quickDesignation() == "Vacent") {
 					System.out.print(jToLetter(j));
-					if (j != 5) {//(economyClass[i][j+1].quickDesignation().equals("Vacent")) {
+					if (j != 5) {
 						System.out.print(", ");
 					}
 				}
@@ -210,11 +193,11 @@ public class ReservationEvent {
 		}
 		else {
 			System.out.println("Error: letterToNumber() is getting an invalid input");
-			System.out.println("Debug: Letter = " + letter);
 			return -1;
 		}
 	}
-	public static void bookPassenger(String passengerName, String seat) { //need to parse int and string from input
+	public static void bookPassenger(String passengerName, String seat) { 
+		//places passengerName at seat
 	    List<String> seatDissect = new ArrayList<String>();
 	    Matcher match = Pattern.compile("[0-9]+|[a-z]+|[A-Z]+").matcher(seat);
 	    while (match.find()) {
@@ -225,9 +208,6 @@ public class ReservationEvent {
 			System.out.println("Error: Invalid seat input");
 			return;
 		}
-		System.out.println("Debug: " + seatDissect.get(0) + " " + seatDissect.get(1));
-		//System.out.println("Debug: " + seatDissect.get(1));
-		
 		int seat123 = Integer.parseInt(seatDissect.get(0));
 		int seatABC = letterToNumber(seatDissect.get(1)); 
 		System.out.println("Debug: seatABC = " + seatABC);
@@ -242,7 +222,7 @@ public class ReservationEvent {
 			System.out.println("Error: row is not in plane (overflow).");
 			return;
 		}
-		if (seat123 >= 10) { //economy
+		if (seat123 >= 10) { 
 			int seat111213 = (seat123 - 10);
 			if (economyClass[seat111213][seatABC].checkSeat() == true) {
 				System.out.println("Request failed, seat is already occupied.");
@@ -252,7 +232,7 @@ public class ReservationEvent {
 				economyClass[seat111213][seatABC].bookSeat(passengerName, "");
 			}
 		}
-		else {//first class
+		else {
 			if (firstClass[seat123][seatABC].checkSeat() == true) {
 				System.out.println("Request failed, seat is already occupied.");
 				return;
@@ -262,14 +242,16 @@ public class ReservationEvent {
 			}
 		}
 	}
-	public static void cancelReservation(String passengerName) { //getSeatByName(String nameToSeek)
+	public static void cancelReservation(String passengerName) {
+		//uses getSeatByName() to get a seat, then unBook()s
 		Reservation results = getSeatByName(passengerName);
-		System.out.println("Debug: Canceling... " + results);
 		if (results != null) {
 			results.unBook();
 		}
 	}
 	public void cancelGroup(String groupToSeek) { 
+		// cancels all reservatins with group = groupToSeek
+		// NOTE: This function is never used
 		int k = 0;
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 4; j++) {
@@ -292,21 +274,17 @@ public class ReservationEvent {
 		}
 		else {
 			System.out.println("Request failed, no entry '" + groupToSeek + "' found.");
-			
 		}
-		
 	} 
 	public static int seatsAvailable() {
+		// Gets the number of seats where this.occupency = false
 		int open = 0;
-		int filled = 0; //debug, already filled
+		int filled = 0; 
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 4; j++) {
 				Boolean truFalse = firstClass[i][j].checkSeat();
 				if (truFalse == false) {
 					open++;
-				}
-				if (truFalse == true) {
-					filled++;
 				}
 			}
 		}
@@ -316,36 +294,28 @@ public class ReservationEvent {
 				if (truFalse == false) {
 					open++;
 				}
-				if (truFalse == true) {
-					filled++;
-				}
 			}
 		}
-		System.out.println("Debug: " + economyClass[1][1].checkSeat());
-		System.out.println("Debug: seatsAvailable() = " + open); 
-		System.out.println("Debug: seats unavailable = " + filled); 
-		//System.out.println("Debug: ?seatsAvailable() = " + nullSeat); 
 		return open;
 	}
 	
 	public static void bookGroup(String groupName, String passengerNames) {
-		int l = passengerNames.length(); // length of the passengerNames string
+		// splits passengerNames into an ArrayList<String>, then books available seats with passengerNames(), groupName
+		int l = passengerNames.length(); 
 		ArrayList<String> passengerGroup = new ArrayList<String>();
-		String currentName = ""; //used to record current name before adding to passengerGroup
+		String currentName = ""; 
 		for (int n = 0; n < l; n++) {
 			if (',' == passengerNames.charAt(n) && currentName != "") {
 				passengerGroup.add(currentName);
-				System.out.println("Debug: Name recognized: " + currentName);
 				currentName = "";
-				for (int m = n; passengerNames.charAt(m) != ' ' && l > m ; m++) { //initialization condition not needed, remove later
+				for (int m = n; passengerNames.charAt(m) != ' ' && l > m ; m++) {
 					n++;
 				}
 			}
-			else{ //if (' ' != passengerNames.charAt(n)) {
+			else{ 
 				currentName = currentName + passengerNames.charAt(n);
-				//currentName.concat((passengerNames.charAt(n)).toString());
 			}
-		} //All passenger names are now entries in passengerGroup
+		} 
 		if (currentName != "") {
 			passengerGroup.add(currentName);
 		}
@@ -356,13 +326,12 @@ public class ReservationEvent {
 		int toServe = passengerGroup.size();
 		int alreadyServed = 0;
 		String passengerName = "";
-		//reminder: arraylists are zero based
 		for (int i = 0; i < 20 && toServe > alreadyServed; i++) {
 			for (int j = 0; j < 6 && toServe > alreadyServed; j++) {
 				Boolean truFalse = economyClass[i][j].checkSeat();
 				if (truFalse == false) {
 					passengerName = passengerGroup.get(alreadyServed);
-					System.out.println("Customer '" + passengerName + "' placed in seat " + (i+10) + "," + j); //change to column-letter
+					System.out.println("Customer '" + passengerName + "' placed in seat " + (i+10) + "," + j);
 					economyClass[i][j].bookSeat(passengerName, groupName);
 					alreadyServed++;
 				}
@@ -373,8 +342,7 @@ public class ReservationEvent {
 				Boolean truFalse = firstClass[i][j].checkSeat();
 				if (truFalse == false) {
 					passengerName = passengerGroup.get(alreadyServed);
-					System.out.println("Customer '" + passengerName + "' placed in seat " + (i) + "," + j); //change to column-letter
-					//Book passengerName at firstClass[i][j]
+					System.out.println("Customer '" + passengerName + "' placed in seat " + (i) + "," + j);
 					firstClass[i][j].bookSeat(passengerName, groupName);
 					alreadyServed++;
 				}
@@ -388,8 +356,9 @@ public class ReservationEvent {
 		LoadFiles();
 	}
 	public static void LoadFiles() throws IOException {
+		//loads files using ReservationFileInterface and Unpacker() (or creates a new file if exisiting isn't found)
 		ReservationFileInterface RFI = new ReservationFileInterface();
-		ArrayList<String> fileData = RFI.ReadFile(); //= [ReservationFileInterface].ReadFile();
+		ArrayList<String> fileData = RFI.ReadFile();
 		if (fileData.size() > 1) {
 			ArrayList<String> unpackedFirstClass = new ArrayList<String>();
 			ArrayList<String> unpackedEconomyClass = new ArrayList<String>();
@@ -399,19 +368,13 @@ public class ReservationEvent {
 			unpackedEconomyClass = Unpacker(economyClassData);
 			int index = 0;
 			for (int i = 0; i < 2; i++) {
-				//System.out.println("Check 4");
 				for (int j = 0; j < 4; j++) {
-					//System.out.println("Check 5");
 					firstClass[i][j].setName(unpackedFirstClass.get(index));
-					//System.out.println("index = " + index + ".  (index) = " + unpackedFirstClass.get(index));
 					index++;
 					firstClass[i][j].setGroup(unpackedFirstClass.get(index));
-					//System.out.println("index = " + index + ".  (index) = " + unpackedFirstClass.get(index));
 					index++;
 					if (firstClass[i][j].getName() != "" | firstClass[i][j].getGroup() != "") {
 						firstClass[i][j].isOccupied();
-						System.out.println("Debug: LoadFiles() isOccupied++");
-						System.out.println("Debug: " + i + " " + j);
 					}
 				}
 			}
@@ -424,18 +387,13 @@ public class ReservationEvent {
 					index++;
 					if (economyClass[i][j].getName() != "" | economyClass[i][j].getGroup() != "") {
 						economyClass[i][j].isOccupied();
-						System.out.println("Debug: LoadFiles() isOccupied++");
-						System.out.println("Debug: " + (i + 10) + " " + j);
 					}
 				}
 			}
-			System.out.println("Debug: LoadFiles has found a valid file");
 		}
 		else {
-			System.out.println("Debug: LoadFiles has not collected a prebuilt file");
 			RFI.CreateFile();
 		}
-		//return;
 	}
 	
 	public static ArrayList<String> Unpacker(String rawData){
@@ -443,17 +401,14 @@ public class ReservationEvent {
 		int l = rawData.length();
 		String current = "";
 		for (int n = 0; n < l; n++) {
-			if (',' == rawData.charAt(n)) {//&& current != ""
-				//System.out.println("n = " + n + ", charAt = " + rawData.charAt(n));
+			if (',' == rawData.charAt(n)) {
 				Unpacked.add(current);
 				current = "";
 			}
-			else{ //if (' ' != passengerNames.charAt(n)) {
-				System.out.println("This is a test.");
+			else{ 
 				current = current + rawData.charAt(n);
-				//currentName.concat((passengerNames.charAt(n)).toString());
 			}
-		} //All passenger names are now entries in passengerGroup
+		} 
 		return Unpacked;
 	}
 	
@@ -462,9 +417,7 @@ public class ReservationEvent {
 		String entry = "";
 		ArrayList<String> PackedData = new ArrayList<String>();
 		for (int i = 0; i < 2; i++) {
-			//System.out.println("Check 4");
 			for (int j = 0; j < 4; j++) {
-				//System.out.println("Check 5");
 				entry = entry + firstClass[i][j].getName() + ",";
 				entry = entry + firstClass[i][j].getGroup() + ",";
 			}
@@ -481,19 +434,7 @@ public class ReservationEvent {
 		RFI.RewriteFile(PackedData);
 	}
 	
-	public void FilePacker() { //change return to String
 		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
 

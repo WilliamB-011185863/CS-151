@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class ReservationFileInterface {
 	public void CreateFile(){
+		//Creates a blank file, if one does not already exist
 		try {
 			Path path = Paths.get("events.txt");
 			if (Files.notExists(path)) {
@@ -25,6 +26,7 @@ public class ReservationFileInterface {
 		}
 	}
 	public boolean CheckFile(){
+		//checks if file exists
 		Path path = Paths.get("events.txt");
 		if (Files.exists(path)) {
 			return true;
@@ -33,7 +35,6 @@ public class ReservationFileInterface {
 	}
 	public ArrayList<String> ReadFile() throws IOException{
 		//read all events out to memory for listing
-		
 		ArrayList<String> words = new ArrayList<String>();
 		CreateFile();
 		BufferedReader reader = new BufferedReader(new FileReader("events.txt"));
@@ -57,7 +58,7 @@ public class ReservationFileInterface {
 			for (int i=0;i<size;i++) {
 				String str = arrData.get(i).toString();
 				writer.write(str);
-				if(i < size-1)//This prevent creating a blank line at the end of the file**
+				if(i < size-1)//This prevent creating a blank line at the end of the file
 						writer.write("\n");
 			}
 			writer.close();
