@@ -80,7 +80,7 @@ public class ReservationEvent {
 		i--;
 		j--;
 		firstClass[i][j].bookSeat(name, group);
-	}
+	}A
 	public void bookEconomyClassSeat(int i, int j, String name, String group) {
 		//simple booking function, basically a wrapper for bookSeat
 		i--;

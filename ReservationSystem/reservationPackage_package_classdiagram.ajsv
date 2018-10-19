@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--AgileJ Ltd. (http://www.agilej.com)--><ajsv>
+    <diagram creationDate="2018-Sep-23 22:05" licenseGrade="evaluation" licenseeName="anon" licenseeOrganization="unknown" populationMethod="Wizard+PACKAGE" version="1.9.1.v20170319-1519">
+        <filterScript>
+
+// no filter script yet defined for this class diagram
+// use CTRL+SPACE for completion suggestions
+
+</filterScript>
+        <class className="reservationPackage.ReservationEvent" modelMemberId="reservationPackage.ReservationEvent" project="ReservationSystem" xLocation="786" yLocation="49"/>
+        <class className="reservationPackage.ReservationTester" modelMemberId="reservationPackage.ReservationTester" project="ReservationSystem" xLocation="2432" yLocation="531"/>
+        <class className="reservationPackage.Reservation" modelMemberId="reservationPackage.Reservation" project="ReservationSystem" xLocation="1723" yLocation="30"/>
+        <class className="reservationPackage.ReservationFileInterface" modelMemberId="reservationPackage.ReservationFileInterface" project="ReservationSystem" xLocation="30" yLocation="238"/>
+    </diagram>
+</ajsv>
