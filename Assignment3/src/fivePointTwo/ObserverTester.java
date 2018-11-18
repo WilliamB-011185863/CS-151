@@ -29,7 +29,8 @@ public class ObserverTester
       BarFrame barFrame = new BarFrame(model);
       
       //ClickDetection clickyClicky = new ClickDetection()
-      model.attach(barFrame);
+      model.attach(barFrame); //Attach is the problem. Only Bar is attached, only it updates
+      model.attach(frame);
       //model.attach(clickyClicky);
    }
 }

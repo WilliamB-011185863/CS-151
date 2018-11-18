@@ -2,12 +2,15 @@ package fivePointTwo;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import java.util.ArrayList;
 
 /**
   A class for displaying the model as a column of textfields in a frame.
 */
-public class TextFrame extends JFrame
+public class TextFrame extends JFrame implements ChangeListener
 {
    /**
       Constructs a JFrame that contains the textfields containing the data
@@ -66,6 +69,11 @@ public class TextFrame extends JFrame
    
    DataModel dataModel;
    JTextField[] fieldList;
+@Override
+public void stateChanged(ChangeEvent e) {
+	//a = d.getData();
+	
+}
    
    //MouseListener rat = new MouseListener() {
 	//   
