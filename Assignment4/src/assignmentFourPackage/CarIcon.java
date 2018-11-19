@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.geom.*;
 import javax.swing.*;
 public class CarIcon implements Icon{
+	//This class represents the car icon, which can be AddShape'd to the ShapeFrame
 	private int car_width;
 	public CarIcon(int widthOfIcon)
 	{

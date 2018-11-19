@@ -9,6 +9,8 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.Icon;
 
 public class SnowManIcon implements Icon{
+	//This class represents the snowman icon, which can be AddShape'd to the ShapeFrame
+	//Yes...  the snowman is upside-down
 	private int snowman_width;
 	public SnowManIcon(int widthOfIcon)
 	{
