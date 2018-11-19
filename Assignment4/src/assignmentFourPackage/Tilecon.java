@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import javax.swing.Icon;
 
 public class Tilecon {
+	//Tilecon - tile-icon. I'm running low on class naming ideas.
+	//This class is meant to hold a icon, with it's coordinates.
 	Icon tilecon;
 	Double xCord;
 	Double yCord;

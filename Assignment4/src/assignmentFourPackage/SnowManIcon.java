@@ -28,14 +28,10 @@ public class SnowManIcon implements Icon{
 	public void paintIcon(Component c, Graphics g, int x, int y)
 	{
 	Graphics2D g2 = (Graphics2D)g;
-	//Ellipse2D.Double body = new Ellipse2D.Double(x + snowman_width*3/8, y + snowman_width/8, snowman_width/4, snowman_width/4);
-	//Ellipse2D.Double head = new Ellipse2D.Double(x + snowman_width*3/8, y + snowman_width*1/8, snowman_width/8, snowman_width/8);
 	Ellipse2D.Double body = new Ellipse2D.Double(x + snowman_width/4, y, snowman_width/2, snowman_width/2);
 	Ellipse2D.Double head = new Ellipse2D.Double(x + snowman_width*3/8, y + snowman_width/2, snowman_width/4, snowman_width/4);
-	//Ellipse2D.Double rearTire = new Ellipse2D.Double(x + car_width*3/5, y + car_width/4, car_width/8, car_width/8);
 	g2.draw(body);
 	g2.draw(head);
-	//g2.draw(body);
 	}
 
 }
