@@ -25,9 +25,9 @@ public class BudgetFileInterface {
 			e.printStackTrace();
 		}
 	}
-	public boolean CheckFile(){
+	public boolean CheckFile(String name){
 		//checks if file exists
-		Path path = Paths.get("events.txt");
+		Path path = Paths.get(name + ".txt");
 		if (Files.exists(path)) {
 			return true;
 			}

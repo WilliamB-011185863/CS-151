@@ -37,7 +37,10 @@ public class BudgetItem {
 			return (-this.value);
 		}
 	}
-
+	
+	public Boolean assetDebt() {
+		return this.plusMinus;
+	}
 	
 	
 	
